@@ -135,3 +135,11 @@ h2 {
   padding-top: 16px;
   border-top: 1px solid lightgray;
 }
+
+.no-todos-container {
+  margin: 20px auto;
+}
+
+.no-todos-container p {
+  text-align: center;
+}

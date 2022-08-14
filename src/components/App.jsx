@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import AddTodo from './AddTodo';
 import TodoList from './TodoList';
+import NoTodos from './NoTodos';
 import { TodosContext } from '../context/TodosContext';
 
 import '../reset.css';
@@ -36,7 +37,7 @@ function App() {
         <div className="todo-app">
           <h2>Todo App</h2>
           <AddTodo />
-          <TodoList />
+          {todos.length ? <TodoList /> : <NoTodos />}
         </div>
       </div>
     </TodosContext.Provider>
