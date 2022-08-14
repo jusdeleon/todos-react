@@ -12,16 +12,16 @@ function AddTodo() {
       return;
     }
 
-    let newTodos = [...todos];
+    let updatedTodos = [...todos];
 
-    newTodos.push({
+    updatedTodos.push({
       id: idForTodo,
       title: newTodo,
       isComplete: false,
       isEditing: false,
     });
 
-    setTodos(newTodos);
+    setTodos(updatedTodos);
     setIdForTodo(prevIdForTodo => prevIdForTodo + 1);
     setNewTodo('');
   };

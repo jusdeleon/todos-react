@@ -3,7 +3,20 @@ import { TodosContext } from '../context/TodosContext';
 import TodoItem from './TodoItem';
 
 function TodoList() {
-  const { todos } = useContext(TodosContext);
+  const { todos, setTodos } = useContext(TodosContext);
+
+  const handleCompleteAll = () => {
+    let updatedTodos = [...todos];
+
+    updatedTodos = updatedTodos.map(todo => {
+      todo.isComplete = true;
+      return todo;
+    });
+
+    setTodos(updatedTodos);
+  };
+
+  const remaining = () => todos.filter(todo => !todo.isComplete).length;
 
   return (
     <>
@@ -15,10 +28,12 @@ function TodoList() {
 
       <div className="check-all-container">
         <div>
-          <div className="button">Check All</div>
+          <div onClick={handleCompleteAll} className="button">
+            Check All
+          </div>
         </div>
 
-        <span>3 items remaining</span>
+        <span>{remaining()} items remaining</span>
       </div>
 
       <div className="other-buttons-container">
