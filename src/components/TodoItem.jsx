@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function TodoItem({ todo }) {
   return (
@@ -26,5 +27,9 @@ function TodoItem({ todo }) {
     </li>
   );
 }
+
+TodoItem.propTypes = {
+  todo: PropTypes.object,
+};
 
 export default TodoItem;

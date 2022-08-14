@@ -28,8 +28,10 @@ function App() {
     },
   ]);
 
+  const [idForTodo, setIdForTodo] = useState(4);
+
   return (
-    <TodosContext.Provider value={{ todos, setTodos }}>
+    <TodosContext.Provider value={{ todos, setTodos, idForTodo, setIdForTodo }}>
       <div className="todo-app-container">
         <div className="todo-app">
           <h2>Todo App</h2>
