@@ -16,6 +16,12 @@ function TodoList() {
     setTodos(updatedTodos);
   };
 
+  const clearCompleted = () => {
+    let updatedTodos = [...todos];
+
+    setTodos(updatedTodos.filter(todo => !todo.isComplete));
+  };
+
   const remaining = () => todos.filter(todo => !todo.isComplete).length;
 
   return (
@@ -28,7 +34,7 @@ function TodoList() {
 
       <div className="check-all-container">
         <div>
-          <div onClick={handleCompleteAll} className="button">
+          <div className="button" onClick={handleCompleteAll}>
             Check All
           </div>
         </div>
@@ -45,7 +51,9 @@ function TodoList() {
           <button className="button filter-button">Completed</button>
         </div>
         <div>
-          <button className="button">Clear completed</button>
+          <button className="button" onClick={clearCompleted}>
+            Clear completed
+          </button>
         </div>
       </div>
     </>
