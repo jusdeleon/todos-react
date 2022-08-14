@@ -1,9 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import classNames from 'classnames';
 import { TodosContext } from '../context/TodosContext';
 import TodoItem from './TodoItem';
 
 function TodoList() {
   const { todos, setTodos } = useContext(TodosContext);
+
+  const [filter, setFilter] = useState('all');
+
+  const getTodos = () => {
+    if (filter === 'all') {
+      return todos;
+    } else if (filter === 'active') {
+      return todos.filter(todo => !todo.isComplete);
+    } else if (filter === 'completed') {
+      return todos.filter(todo => todo.isComplete);
+    }
+  };
+
+  const remaining = () => getTodos().filter(todo => !todo.isComplete).length;
 
   const handleCompleteAll = () => {
     let updatedTodos = [...todos];
@@ -22,12 +37,10 @@ function TodoList() {
     setTodos(updatedTodos.filter(todo => !todo.isComplete));
   };
 
-  const remaining = () => todos.filter(todo => !todo.isComplete).length;
-
   return (
     <>
       <ul className="todo-list">
-        {todos.map(todo => (
+        {getTodos().map(todo => (
           <TodoItem key={todo.id} todo={todo} />
         ))}
       </ul>
@@ -44,11 +57,30 @@ function TodoList() {
 
       <div className="other-buttons-container">
         <div>
-          <button className="button filter-button filter-button-active">
+          <button
+            className={classNames('button', 'filter-button', {
+              'filter-button-active': filter === 'all',
+            })}
+            onClick={() => setFilter('all')}
+          >
             All
           </button>
-          <button className="button filter-button">Active</button>
-          <button className="button filter-button">Completed</button>
+          <button
+            className={classNames('button', 'filter-button', {
+              'filter-button-active': filter === 'active',
+            })}
+            onClick={() => setFilter('active')}
+          >
+            Active
+          </button>
+          <button
+            className={classNames('button', 'filter-button', {
+              'filter-button-active': filter === 'completed',
+            })}
+            onClick={() => setFilter('completed')}
+          >
+            Completed
+          </button>
         </div>
         <div>
           <button className="button" onClick={clearCompleted}>
